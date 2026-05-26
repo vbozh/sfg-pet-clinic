@@ -6,6 +6,7 @@ This repo is for my online course called [Spring Framework 5: Beginner to Guru](
 
 Contained in this repo is an opinionated version of the classic reference application - [Spring Pet Clinic](https://github.com/spring-projects/spring-petclinic)
 
+This project is maintained as a learning resource for Spring Framework development.
 
 
 # License
