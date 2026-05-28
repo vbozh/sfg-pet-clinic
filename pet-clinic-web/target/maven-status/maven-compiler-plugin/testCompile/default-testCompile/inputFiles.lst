@@ -1,0 +1,4 @@
+/workspaces/sfg-pet-clinic/pet-clinic-web/src/test/java/guru/springframework/sfgpetclinic/controllers/PetControllerTest.java
+/workspaces/sfg-pet-clinic/pet-clinic-web/src/test/java/guru/springframework/sfgpetclinic/controllers/VisitControllerTest.java
+/workspaces/sfg-pet-clinic/pet-clinic-web/src/test/java/guru/springframework/sfgpetclinic/controllers/OwnerControllerTest.java
+/workspaces/sfg-pet-clinic/pet-clinic-web/src/test/java/guru/springframework/sfgpetclinic/SfgPetClinicApplicationTests.java

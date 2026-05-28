@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>VetSDJpaService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">pet-clinic-data</a> &gt; <a href="index.source.html" class="el_package">guru.springframework.sfgpetclinic.services.springdatajpa</a> &gt; <span class="el_source">VetSDJpaService.java</span></div><h1>VetSDJpaService.java</h1><pre class="source lang-java linenums">package guru.springframework.sfgpetclinic.services.springdatajpa;
+
+import guru.springframework.sfgpetclinic.model.Vet;
+import guru.springframework.sfgpetclinic.repositories.VetRepository;
+import guru.springframework.sfgpetclinic.services.VetService;
+import org.springframework.context.annotation.Profile;
+import org.springframework.stereotype.Service;
+
+import java.util.HashSet;
+import java.util.Set;
+
+/**
+ * Created by jt on 8/5/18.
+ */
+@Service
+@Profile(&quot;springdatajpa&quot;)
+public class VetSDJpaService implements VetService {
+
+    private final VetRepository vetRepository;
+
+<span class="nc" id="L21">    public VetSDJpaService(VetRepository vetRepository) {</span>
+<span class="nc" id="L22">        this.vetRepository = vetRepository;</span>
+<span class="nc" id="L23">    }</span>
+
+    @Override
+    public Set&lt;Vet&gt; findAll() {
+<span class="nc" id="L27">        Set&lt;Vet&gt; vets = new HashSet&lt;&gt;();</span>
+<span class="nc" id="L28">        vetRepository.findAll().forEach(vets::add);</span>
+<span class="nc" id="L29">        return vets;</span>
+    }
+
+    @Override
+    public Vet findById(Long aLong) {
+<span class="nc" id="L34">        return vetRepository.findById(aLong).orElse(null);</span>
+    }
+
+    @Override
+    public Vet save(Vet object) {
+<span class="nc" id="L39">        return vetRepository.save(object);</span>
+    }
+
+    @Override
+    public void delete(Vet object) {
+<span class="nc" id="L44">        vetRepository.delete(object);</span>
+<span class="nc" id="L45">    }</span>
+
+    @Override
+    public void deleteById(Long aLong) {
+<span class="nc" id="L49">        vetRepository.deleteById(aLong);</span>
+<span class="nc" id="L50">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.13.202504020838</span></div></body></html>

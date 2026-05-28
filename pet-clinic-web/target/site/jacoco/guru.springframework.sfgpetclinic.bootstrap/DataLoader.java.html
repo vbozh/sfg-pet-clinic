@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>DataLoader.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">pet-clinic-web</a> &gt; <a href="index.source.html" class="el_package">guru.springframework.sfgpetclinic.bootstrap</a> &gt; <span class="el_source">DataLoader.java</span></div><h1>DataLoader.java</h1><pre class="source lang-java linenums">package guru.springframework.sfgpetclinic.bootstrap;
+
+import guru.springframework.sfgpetclinic.model.*;
+import guru.springframework.sfgpetclinic.services.*;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.stereotype.Component;
+
+import java.time.LocalDate;
+
+/**
+ * Created by jt on 7/25/18.
+ */
+@Component
+public class DataLoader implements CommandLineRunner {
+
+    private final OwnerService ownerService;
+    private final VetService vetService;
+    private final PetTypeService petTypeService;
+    private final SpecialtyService specialtyService;
+    private final VisitService visitService;
+
+    public DataLoader(OwnerService ownerService, VetService vetService, PetTypeService petTypeService,
+<span class="fc" id="L23">                      SpecialtyService specialtyService, VisitService visitService) {</span>
+<span class="fc" id="L24">        this.ownerService = ownerService;</span>
+<span class="fc" id="L25">        this.vetService = vetService;</span>
+<span class="fc" id="L26">        this.petTypeService = petTypeService;</span>
+<span class="fc" id="L27">        this.specialtyService = specialtyService;</span>
+<span class="fc" id="L28">        this.visitService = visitService;</span>
+<span class="fc" id="L29">    }</span>
+
+    @Override
+    public void run(String... args) throws Exception {
+
+<span class="fc" id="L34">        int count = petTypeService.findAll().size();</span>
+
+<span class="pc bpc" id="L36" title="1 of 2 branches missed.">        if (count == 0 ){</span>
+<span class="fc" id="L37">            loadData();</span>
+        }
+<span class="fc" id="L39">    }</span>
+
+    private void loadData() {
+<span class="fc" id="L42">        PetType dog = new PetType();</span>
+<span class="fc" id="L43">        dog.setName(&quot;Dog&quot;);</span>
+<span class="fc" id="L44">        PetType savedDogPetType = petTypeService.save(dog);</span>
+
+<span class="fc" id="L46">        PetType cat = new PetType();</span>
+<span class="fc" id="L47">        cat.setName(&quot;Cat&quot;);</span>
+<span class="fc" id="L48">        PetType savedCatPetType = petTypeService.save(cat);</span>
+
+<span class="fc" id="L50">        Speciality radiology = new Speciality();</span>
+<span class="fc" id="L51">        radiology.setDescription(&quot;Radiology&quot;);</span>
+<span class="fc" id="L52">        Speciality savedRadiology = specialtyService.save(radiology);</span>
+
+<span class="fc" id="L54">        Speciality surgery = new Speciality();</span>
+<span class="fc" id="L55">        surgery.setDescription(&quot;Surgery&quot;);</span>
+<span class="fc" id="L56">        Speciality savedSurgery = specialtyService.save(surgery);</span>
+
+<span class="fc" id="L58">        Speciality dentistry = new Speciality();</span>
+<span class="fc" id="L59">        dentistry.setDescription(&quot;dentistry&quot;);</span>
+<span class="fc" id="L60">        Speciality savedDentistry = specialtyService.save(dentistry);</span>
+
+<span class="fc" id="L62">        Owner owner1 = new Owner();</span>
+<span class="fc" id="L63">        owner1.setFirstName(&quot;Michael&quot;);</span>
+<span class="fc" id="L64">        owner1.setLastName(&quot;Weston&quot;);</span>
+<span class="fc" id="L65">        owner1.setAddress(&quot;123 Brickerel&quot;);</span>
+<span class="fc" id="L66">        owner1.setCity(&quot;Miami&quot;);</span>
+<span class="fc" id="L67">        owner1.setTelephone(&quot;1231231234&quot;);</span>
+
+<span class="fc" id="L69">        Pet mikesPet = new Pet();</span>
+<span class="fc" id="L70">        mikesPet.setPetType(savedDogPetType);</span>
+<span class="fc" id="L71">        mikesPet.setOwner(owner1);</span>
+<span class="fc" id="L72">        mikesPet.setBirthDate(LocalDate.now());</span>
+<span class="fc" id="L73">        mikesPet.setName(&quot;Rosco&quot;);</span>
+<span class="fc" id="L74">        owner1.getPets().add(mikesPet);</span>
+
+<span class="fc" id="L76">        ownerService.save(owner1);</span>
+
+<span class="fc" id="L78">        Owner owner2 = new Owner();</span>
+<span class="fc" id="L79">        owner2.setFirstName(&quot;Fiona&quot;);</span>
+<span class="fc" id="L80">        owner2.setLastName(&quot;Glenanne&quot;);</span>
+<span class="fc" id="L81">        owner2.setAddress(&quot;123 Brickerel&quot;);</span>
+<span class="fc" id="L82">        owner2.setCity(&quot;Miami&quot;);</span>
+<span class="fc" id="L83">        owner2.setTelephone(&quot;1231231234&quot;);</span>
+
+<span class="fc" id="L85">        Pet fionasCat = new Pet();</span>
+<span class="fc" id="L86">        fionasCat.setName(&quot;Just Cat&quot;);</span>
+<span class="fc" id="L87">        fionasCat.setOwner(owner2);</span>
+<span class="fc" id="L88">        fionasCat.setBirthDate(LocalDate.now());</span>
+<span class="fc" id="L89">        fionasCat.setPetType(savedCatPetType);</span>
+<span class="fc" id="L90">        owner2.getPets().add(fionasCat);</span>
+
+<span class="fc" id="L92">        ownerService.save(owner2);</span>
+
+<span class="fc" id="L94">        Visit catVisit = new Visit();</span>
+<span class="fc" id="L95">        catVisit.setPet(fionasCat);</span>
+<span class="fc" id="L96">        catVisit.setDate(LocalDate.now());</span>
+<span class="fc" id="L97">        catVisit.setDescription(&quot;Sneezy Kitty&quot;);</span>
+
+<span class="fc" id="L99">        visitService.save(catVisit);</span>
+
+<span class="fc" id="L101">        System.out.println(&quot;Loaded Owners....&quot;);</span>
+
+<span class="fc" id="L103">        Vet vet1 = new Vet();</span>
+<span class="fc" id="L104">        vet1.setFirstName(&quot;Sam&quot;);</span>
+<span class="fc" id="L105">        vet1.setLastName(&quot;Axe&quot;);</span>
+<span class="fc" id="L106">        vet1.getSpecialities().add(savedRadiology);</span>
+
+<span class="fc" id="L108">        vetService.save(vet1);</span>
+
+<span class="fc" id="L110">        Vet vet2 = new Vet();</span>
+<span class="fc" id="L111">        vet2.setFirstName(&quot;Jessie&quot;);</span>
+<span class="fc" id="L112">        vet2.setLastName(&quot;Porter&quot;);</span>
+<span class="fc" id="L113">        vet2.getSpecialities().add(savedSurgery);</span>
+
+<span class="fc" id="L115">        vetService.save(vet2);</span>
+
+<span class="fc" id="L117">        System.out.println(&quot;Loaded Vets....&quot;);</span>
+<span class="fc" id="L118">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.13.202504020838</span></div></body></html>
